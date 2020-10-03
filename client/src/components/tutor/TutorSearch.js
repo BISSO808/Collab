@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from 'material-ui-search-bar';
-import image from '../../img/pexels-jeshootscom-442574.jpg';
+import image from '../../img/collab.jpg';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { getTutors } from '../../actions/tutor';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,22 +11,26 @@ import { getQuestionSearch } from '../../actions/search';
 import TutorList from './TutorsList';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { relative } from 'path';
 const useStyles = makeStyles((theme) => ({
 	img: {
 		flexGrow: 1,
+		opacity: 0.8,
 		backgroundColor: theme.palette.secondary['A100'],
-		overflow: 'hidden',
 		background: `url(${image})no-repeat`,
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
 		marginTop: 5,
 		padding: 100,
-		paddingBottom: 200,
+		paddingBottom: 300,
+		height: 100,
 	},
 	text: {
-		align: 'center',
-		color: '#264653',
-		variant: 'h2',
+		position: 'relative',
+		bottom: 200,
+	},
+	form: {
+		opacity: 1,
 	},
 }));
 const TutorSearch = ({
@@ -70,17 +74,18 @@ const TutorSearch = ({
 	};
 	return (
 		<div>
-			<div className={classes.img}>
-				<form className={classes.form} onSubmit={(e) => onSubmit(e)}>
-					<Typography align="center" color="primary" variant="h2">
-						Tutor Connect
+			<div className={classes.img}></div>
+			<div className={classes.text}>
+				<form className={classes.text} onSubmit={(e) => onSubmit(e)}>
+					<Typography align="center" color="secondary" variant="h1">
+						Code Collab
 					</Typography>
-					<Typography align="center" color="primary" variant="h4">
-						Get Tutors to help you{' '}
+					<Typography align="center" color="secondary" variant="h4">
+						Project Collaboration Platform{' '}
 					</Typography>
 					<SearchBar
 						name="searchValue"
-						placeholder="What subject do you need help with?(e.g. 'Calculus')"
+						placeholder="Search for project or project owner"
 						value={searchValue}
 						onChange={(e) => change(e)}
 						onRequestSearch={(e) => onSubmit(e)}
@@ -90,8 +95,8 @@ const TutorSearch = ({
 						}}
 					/>
 				</form>
+				<TutorList />
 			</div>
-			<TutorList />
 		</div>
 	);
 };

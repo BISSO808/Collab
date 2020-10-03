@@ -4,7 +4,7 @@ const router = express.Router();
 const Profile = require('../../model/Profiles');
 const User = require('../../model/User');
 router.post('/', auth, async (req, res) => {
-	const { subject, bio, isAvailable } = req.body;
+	const { subject, bio, isAvailable, major } = req.body;
 	let findUser = await User.findById(res.locals.user.id).select('-password');
 
 	try {
@@ -13,6 +13,7 @@ router.post('/', auth, async (req, res) => {
 			name: findUser.name,
 			subject,
 			bio,
+			major,
 			isAvailable,
 		});
 		console.log(profile);

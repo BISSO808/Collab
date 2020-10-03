@@ -19,11 +19,14 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 const useStyles = makeStyles((theme) => ({
+	top: {
+		paddingTop: 30,
+	},
 	root: {
 		background: '#f0efeb',
 	},
 	content: {
-		padding: 0,
+		paddingTop: 10,
 	},
 	inner: {
 		minWidth: 1050,
@@ -72,67 +75,68 @@ const Ques = ({ questions, state, question: { loading, deleted } }) => {
 		// 			</TableBody>
 		// 		</Table>
 		// 	</TableContainer> */}
-
-		<Card className={classes.root}>
-			<CardContent className={classes.content}>
-				Top Questions
-				<Table>
-					<TableBody>
-						{questions != null &&
-							questions.length > 0 &&
-							questions.map((ques) => (
-								<TableRow>
-									{ques.comments.length === 0 ? (
-										<TableCell style={{ color: 'red' }}>
-											0
-											<Typography
-												variant="overline"
-												display="block"
-												gutterBottom
-											>
-												Answer
-											</Typography>
-										</TableCell>
-									) : (
-										<TableCell alignCenter style={{ color: 'green' }}>
-											{ques.comments.length}{' '}
-											<Typography
-												variant="overline"
-												display="block"
-												gutterBottom
-											>
-												Answer
-											</Typography>
-										</TableCell>
-									)}
-									<TableCell>
-										<Link
-											style={{ textDecoration: 'none', color: 'black' }}
-											to={{ pathname: '/question-info', state: ques }}
-										>
-											{' '}
-											{ques.problem}
-										</Link>
-									</TableCell>
-									<Hidden xsDown>
-										<TableCell xs={0}>
+		<div className={classes.top}>
+			<Card className={classes.root}>
+				<CardContent className={classes.content}>
+					Top Questions
+					<Table>
+						<TableBody>
+							{questions != null &&
+								questions.length > 0 &&
+								questions.map((ques) => (
+									<TableRow>
+										{ques.comments.length === 0 ? (
+											<TableCell style={{ color: 'red' }}>
+												0
+												<Typography
+													variant="overline"
+													display="block"
+													gutterBottom
+												>
+													Answer
+												</Typography>
+											</TableCell>
+										) : (
+											<TableCell alignCenter style={{ color: 'green' }}>
+												{ques.comments.length}{' '}
+												<Typography
+													variant="overline"
+													display="block"
+													gutterBottom
+												>
+													Answer
+												</Typography>
+											</TableCell>
+										)}
+										<TableCell>
 											<Link
-												style={{
-													textDecoration: 'none',
-													color: 'black',
-												}}
-												to={`/profile/${ques.user}`}
+												style={{ textDecoration: 'none', color: 'black' }}
+												to={{ pathname: '/question-info', state: ques }}
 											>
-												{ques.userName}
+												{' '}
+												{ques.problem}
 											</Link>
 										</TableCell>
-									</Hidden>
-								</TableRow>
-							))}
-					</TableBody>
-				</Table>
-			</CardContent>
-		</Card>
+										<Hidden xsDown>
+											<TableCell xs={0}>
+												<Link
+													style={{
+														textDecoration: 'none',
+														color: 'black',
+													}}
+													to={`/profile/${ques.user}`}
+												>
+													{ques.userName}
+												</Link>
+											</TableCell>
+										</Hidden>
+									</TableRow>
+								))}
+						</TableBody>
+					</Table>
+				</CardContent>
+			</Card>
+		</div>
 	) : (
 		<CircularProgress disableShrink />
 	);

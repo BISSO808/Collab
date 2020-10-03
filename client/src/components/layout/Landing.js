@@ -7,8 +7,8 @@ const Landing = () => {
 			<section className="landing">
 				<div className="dark-overlay">
 					<div className="landing-inner">
-						<h1 className="x-large">Tutor Connect</h1>
-						<p className="lead">Share knowledge and Skills</p>
+						<h1 className="x-large">Code Collab</h1>
+						<p className="lead">Project Collaboration Platform</p>
 						<div className="buttons">
 							<Link to="/register" className="btn btn-primary">
 								Sign Up{' '}

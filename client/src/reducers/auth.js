@@ -37,9 +37,17 @@ export default function (state = initialState, action) {
 		case LOGIN_FAILURE:
 		case LOGOUT:
 			localStorage.removeItem('token');
+			localStorage.removeItem('persist:root');
+			// storage.removeItem('persist:otherKey')
 			return {
 				state: undefined,
 			};
+		// return {
+		// 	...state,
+		// 	token: null,
+		// 	isAuthenticated: false,
+		// 	loading: true,
+		// };
 		default:
 			return state;
 	}

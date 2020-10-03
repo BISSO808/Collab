@@ -14,7 +14,9 @@ const Dashboard = ({
 	questions,
 	state,
 }) => {
-	useEffect(() => {}, []);
+	useEffect(() => {
+		// loadQuestions();
+	}, []);
 	const viewall = () => {
 		loadQuestions();
 	};
@@ -22,8 +24,8 @@ const Dashboard = ({
 		<Container component="main">
 			<p>You want to get solution for any problem</p>
 			<Link to="/create-question" style={{ textDecoration: 'none' }}>
-				<Button style={{ background: '#264653', color: '#ffffff' }}>
-					Ask Question
+				<Button style={{ background: 'green', color: 'white' }}>
+					Add Project
 				</Button>
 			</Link>
 			<Button

@@ -14,6 +14,9 @@ const ProfileSchema = new Schema({
 	isAvailable: {
 		type: Number,
 	},
+	major: {
+		type: String,
+	},
 	subject: {
 		type: Array,
 	},

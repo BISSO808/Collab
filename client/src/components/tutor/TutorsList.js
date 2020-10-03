@@ -6,14 +6,10 @@ import { getTutors } from '../../actions/tutor';
 import { connect } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
-	root: {
-		padding: theme.spacing(3),
-	},
-	content: {
-		marginTop: theme.spacing(2),
-	},
+	root: {},
+	content: {},
 	pagination: {
-		marginTop: theme.spacing(3),
+		marginTop: theme.spacing(1),
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'flex-end',
@@ -58,16 +54,14 @@ const TutorsList = ({ getTutors, profiles, loading }) => {
 		return <CircularProgress disableShrink />;
 	} else {
 		return (
-			<div className={classes.root}>
-				<div className={classes.content}>
-					<Grid container spacing={3}>
-						{profiles.map((profile) => (
-							<Grid item key={profile.id} lg={4} md={6} xs={12}>
-								<Tutor profile={profile} />
-							</Grid>
-						))}
-					</Grid>
-				</div>
+			<div className={classes.content}>
+				<Grid container spacing={3}>
+					{profiles.map((profile) => (
+						<Grid item key={profile.id} lg={4} md={6} xs={12}>
+							<Tutor profile={profile} />
+						</Grid>
+					))}
+				</Grid>
 			</div>
 		);
 	}

@@ -50,13 +50,12 @@ const useStyles = makeStyles((theme) => ({
 
 const TutorProfile = (props) => {
 	const id = props.id;
-
+	// props.getOneTutor({ id });
 	useEffect(() => {
 		console.log(props);
-		// id = props.id;
-		console.log(id);
+		// console.log('this is useeffet');
 		props.getOneTutor({ id });
-	}, [id]);
+	}, []);
 	const classes = useStyles();
 	const profile = props.profile;
 	const getName = () => {

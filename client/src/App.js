@@ -23,10 +23,24 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
 import Dashboard from './components/layout/Dashboard';
 import Image from './img/book-2943383_1280.png';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { red } from '@material-ui/core/colors';
 if (localStorage.token) {
 	setAuthToken(localStorage.token);
 }
-
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			light: '#006BA6',
+			main: '#006BA6',
+		},
+		secondary: {
+			light: '#ffffff',
+			main: '#ffffff',
+		},
+	},
+});
 const useStyle = () =>
 	makeStyles({
 		image: {
@@ -43,46 +57,48 @@ const App = () => {
 	}, []);
 
 	return (
-		<Router>
-			<Grid container direction="column">
-				<Fragment>
-					<Grid item>
-						<Navbar />
-						{/* <h1>header</h1> */}
-					</Grid>
-				</Fragment>
-				<Grid item container>
-					<Grid item sm={2} xs={0} />
-					<Grid item sm={8} xs={12} paddingTop="100px">
-						<Fragment>
-							<Route exact path="/" component={Tutors} />
+		<ThemeProvider theme={theme}>
+			<Router>
+				<Grid container direction="column">
+					<Fragment>
+						<Grid item>
+							<Navbar />
+							{/* <h1>header</h1> */}
+						</Grid>
+					</Fragment>
+					<Grid item container>
+						<Grid item sm={2} xs={0} />
+						<Grid item sm={8} xs={12} paddingTop="100px">
+							<Fragment>
+								<Route exact path="/" component={Tutors} />
 
-							{/* <section className="container"> */}
-							<Alert />
-							<Switch>
-								<Route exact path="/questions" component={Dashboard} />
-								<Route exact path="/register" component={Register} />
-								<Route exact path="/login" component={Login} />
-								<Route exact path="/profile/:id" component={Profile} />
-								{/* <PrivateRoute exact path="/dashboard" component={Dashboard} /> */}
-								<PrivateRoute
-									exact
-									path="/create-question"
-									component={AddQuestion}
-								/>
-								<Route
-									exact
-									path="/question-info"
-									component={Questioninfo}
-								></Route>
-							</Switch>
-							{/* </section> */}
-						</Fragment>
+								{/* <section className="container"> */}
+								<Alert />
+								<Switch>
+									<Route exact path="/questions" component={Dashboard} />
+									<Route exact path="/register" component={Register} />
+									<Route exact path="/login" component={Login} />
+									<Route exact path="/profile/:id" component={Profile} />
+									{/* <PrivateRoute exact path="/dashboard" component={Dashboard} /> */}
+									<PrivateRoute
+										exact
+										path="/create-question"
+										component={AddQuestion}
+									/>
+									<Route
+										exact
+										path="/question-info"
+										component={Questioninfo}
+									></Route>
+								</Switch>
+								{/* </section> */}
+							</Fragment>
+						</Grid>
+						<Grid item sm={2} xs={0} />
 					</Grid>
-					<Grid item sm={2} xs={0} />
 				</Grid>
-			</Grid>
-		</Router>
+			</Router>
+		</ThemeProvider>
 	);
 };
 

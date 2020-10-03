@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
 import { CircularProgress } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -35,6 +36,16 @@ const Ques = ({ loadQuestionById, match, userQuestions, loading, user }) => {
 
 	return !loading ? (
 		<div className={classes.root}>
+			{user._id ? (
+				<Link to="/create-question" style={{ textDecoration: 'none' }}>
+					<Button style={{ background: 'green', color: 'white' }}>
+						Add Project
+					</Button>
+				</Link>
+			) : (
+				<p></p>
+			)}
+
 			<Grid container spacing={4}>
 				<Grid item lg={4} md={6} xl={4} xs={12}>
 					<TutorProfile id={match.params.id} />
@@ -46,7 +57,7 @@ const Ques = ({ loadQuestionById, match, userQuestions, loading, user }) => {
 								{' '}
 								<TableRow>
 									<TableCell align="center">
-										<h2 className="text-primary">Your Questions</h2>
+										<h2 className="text-primary">Your Projects</h2>
 									</TableCell>
 								</TableRow>
 							</TableHead>

@@ -63,7 +63,7 @@ const AddQuestion = ({ oneq, submitQuestion }) => {
 				<Avatar className={classes.avatar}>
 					<Help />
 				</Avatar>
-				<Typography>Ask Question</Typography>
+				<Typography>Add Project Details</Typography>
 				<form className={classes.form} onSubmit={(e) => onSubmit(e)}>
 					<TextField
 						variant="outlined"

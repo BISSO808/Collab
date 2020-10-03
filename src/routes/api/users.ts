@@ -18,12 +18,12 @@ router.post(
 			'password',
 			'password is required and must be 6 character or more'
 		).isLength({ min: 6 }),
-		check('subject', 'subject is required').not().isEmpty(),
+		check('major', 'major is required').not().isEmpty(),
 	],
 	async (req: any, res: any) => {
 		const errors = validationResult(req);
 		if (errors.isEmpty()) {
-			var { name, email, password, subject } = req.body;
+			var { name, email, password, major } = req.body;
 			try {
 				let user = await User.findOne({ email });
 				if (user) {
@@ -33,12 +33,12 @@ router.post(
 						bcrypt.hash(password, salt, async function (err: any, hash: any) {
 							// Store hash in your password DB.
 							password = hash;
-							user = new User({ name, email, password, subject });
+							user = new User({ name, email, password, major });
 							await user.save();
 							let profile = new Profile({
 								user: user.id,
 								name,
-								subject,
+								major,
 							});
 							await profile.save();
 							// Returns JWT

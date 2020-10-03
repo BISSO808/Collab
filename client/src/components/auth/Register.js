@@ -47,9 +47,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 		email: '',
 		password: '',
 		confirmPassword: '',
-		subject: '',
+		major: '',
 	});
-	const { name, email, password, confirmPassword, subject } = formData;
+	const { name, email, password, confirmPassword, major } = formData;
 	const change = (e) =>
 		setFormData({
 			...formData,
@@ -64,7 +64,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 				'error'
 			);
 		} else {
-			register({ name, email, password, subject });
+			console.log({ name, email, password, major });
+			register({ name, email, password, major });
 		}
 	};
 	//redirect if logged in
@@ -116,10 +117,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 						variant="outlined"
 						fullWidth
 						autoFocus
-						name="subject"
+						name="major"
 						margin="normal"
-						label="subject"
-						value={subject}
+						label="major"
+						value={major}
 						onChange={(e) => {
 							change(e);
 						}}

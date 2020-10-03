@@ -18,12 +18,12 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
 	root: {},
 	heading: {
-		color: '#264653',
+		color: theme.primary,
 		align: 'center',
 	},
 	avatar: {
 		margin: theme.spacing(1),
-		backgroundColor: '#264653',
+		backgroundColor: theme.primary,
 	},
 	paper: {
 		marginTop: theme.spacing(8),
