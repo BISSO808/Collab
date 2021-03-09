@@ -10,8 +10,8 @@ import { Grid, TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+// import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+// import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Container from '@material-ui/core/Container';
 import Comment from './Comment';
 const Questioninfo = (props) => {
@@ -42,16 +42,16 @@ const Questioninfo = (props) => {
 			<p>Please upvote the answer you think was helful.</p>
 			<div className={classes.root}>
 				<Link to="/create-question" style={{ textDecoration: 'none' }}>
-					<Button style={{ background: '#264653', color: '#ffffff' }}>
-						Ask Question
+					<Button
+						style={{ background: '#264653', color: '#ffffff', margin: '30px' }}
+					>
+						Add Project
 					</Button>
 				</Link>
 				<Grid container spacing={2}>
 					<Grid item xs={12}>
 						<Paper className={classes.paper}>
 							<h1 className="ques text-primary">{ques.problem}</h1>
-							<p className={classes.textel}>Asked</p>
-							<p className={classes.texttel2}>subject {ques.subject}</p>
 						</Paper>
 						<Grid item xs={12}>
 							<Paper className={classes.paper}>{ques.link}</Paper>
@@ -122,6 +122,7 @@ const useStyles = makeStyles((theme) => ({
 	paper: {
 		padding: theme.spacing(2),
 		textAlign: 'tight',
+		backgroundColor: '#bcd4e6',
 	},
 	textel: {
 		textAlign: 'left',

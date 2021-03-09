@@ -1,13 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 const MessageSchema = new Schema({
-	sender: {
-		type: Schema.Types.ObjectId,
-		ref: 'user',
-	},
-	receiver: {
-		type: String,
-		required: true,
-	},
+	users: [{ String }],
 	time: {
 		type: Date,
 		default: Date.now,

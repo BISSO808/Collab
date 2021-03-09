@@ -78,7 +78,7 @@ const Ques = ({ questions, state, question: { loading, deleted } }) => {
 		<div className={classes.top}>
 			<Card className={classes.root}>
 				<CardContent className={classes.content}>
-					Top Questions
+					Top Projects
 					<Table>
 						<TableBody>
 							{questions != null &&

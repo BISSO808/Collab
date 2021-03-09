@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
+import { reducer as formReducer } from 'redux-form'
 import storage from 'redux-persist/lib/storage';
 import user from './user';
 import alert from './alert';
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
 	tutor,
 	userName,
 	search,
+	form:formReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

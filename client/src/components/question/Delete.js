@@ -15,13 +15,9 @@ const Delete = ({ questionId, deleteQuestion }) => {
 	};
 
 	return (
-		<IconButton
-			variant="contained"
-			color="secondary"
-			onClick={() => deleteQues(questionId)}
-		>
-			<DeleteIcon fontSize="large" />
-		</IconButton>
+		<Button variant="contained" onClick={() => deleteQues(questionId)}>
+			<DeleteIcon color="btn" fontSize="large" />
+		</Button>
 	);
 };
 

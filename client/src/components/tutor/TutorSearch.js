@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from 'material-ui-search-bar';
 import image from '../../img/collab.jpg';
-import { TextField, Button, Typography } from '@material-ui/core';
+import {Typography } from '@material-ui/core';
 import { getTutors } from '../../actions/tutor';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Fuse from 'fuse.js';
+import { makeStyles, } from '@material-ui/core/styles';
+import {Grid} from '@material-ui/core'
 import PropTypes from 'prop-types';
 import { getQuestionSearch } from '../../actions/search';
 import TutorList from './TutorsList';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { relative } from 'path';
+import Login from '../auth/Login'
 const useStyles = makeStyles((theme) => ({
 	img: {
 		flexGrow: 1,
@@ -21,8 +20,7 @@ const useStyles = makeStyles((theme) => ({
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
 		marginTop: 5,
-		padding: 100,
-		paddingBottom: 300,
+		padding: 200,
 		height: 100,
 	},
 	text: {
@@ -32,19 +30,35 @@ const useStyles = makeStyles((theme) => ({
 	form: {
 		opacity: 1,
 	},
+	sectionMobile: {
+		display: 'block',
+		[theme.breakpoints.up('md')]: {
+			display: 'none',
+		},
+	},
+	sectionDesktop: {
+		display: 'none',
+		[theme.breakpoints.up('md')]: {
+			display: 'block',
+		},
+	},
+	info:{
+		paddingTop:300
+	}
 }));
 const TutorSearch = ({
 	history,
 	profiles,
 	getTutors,
 	getQuestionSearch,
+	isAuthenticated,
 	searched,
 }) => {
 	const classes = useStyles();
 	useEffect(() => {
 		getTutors();
 	}, []);
-
+console.log("hey lover"+history)
 	const [data, setData] = useState({
 		searchValue: '',
 	});
@@ -53,51 +67,54 @@ const TutorSearch = ({
 		setData({ ...data, searchValue: e });
 	};
 	const onSubmit = (e) => {
-		// const options = {
-		// 	includeScore: true,
-		// 	keys: ['subject', 'user', 'name'],
-		// };
-		// // const data = [];
-		// // profiles.map((profile) => {
-		// // 	data.push([profile.name, profile._id]);
-		// // });
-		// const fuse = new Fuse(profiles, options);
-		// const result = fuse.search(search);
-		// console.log(result);
-		// setData({ ...data, search: '' });
 		getQuestionSearch({ searchValue });
 		const change = false;
 		history.push('/questions');
 	};
-	const redirect = () => {
-		return <Redirect to="/questions"></Redirect>;
-	};
 	return (
+		(!isAuthenticated) ?
 		<div>
-			<div className={classes.img}></div>
+			{console.log(isAuthenticated)}
+			<div className={classes.img} />
 			<div className={classes.text}>
 				<form className={classes.text} onSubmit={(e) => onSubmit(e)}>
-					<Typography align="center" color="secondary" variant="h1">
-						Code Collab
-					</Typography>
-					<Typography align="center" color="secondary" variant="h4">
-						Project Collaboration Platform{' '}
-					</Typography>
-					<SearchBar
-						name="searchValue"
-						placeholder="Search for project or project owner"
-						value={searchValue}
-						onChange={(e) => change(e)}
-						onRequestSearch={(e) => onSubmit(e)}
-						style={{
-							margin: '0 auto',
-							maxWidth: 800,
-						}}
-					/>
+					<div className={classes.sectionDesktop}>
+						<Grid container>
+						<Grid xs={6}>
+						<div className="info">
+						<Typography align="center" color="secondary" variant="h1">
+							Code Collab
+						</Typography>
+						<Typography align="center" color="secondary" variant="h4">
+							Project Collaboration Platform{' '}
+						</Typography>
+						</div>
+						</Grid>
+						<Grid xs={6}>
+						<Login/>
+						</Grid>
+						</Grid>
+					</div>
+					<div className={classes.sectionMobile}>
+						<Typography align="center" color="secondary" variant="h3">
+							Code Collab
+						</Typography>
+						<SearchBar
+							name="searchValue"
+							placeholder="Search for project or project owner"
+							value={searchValue}
+							onChange={(e) => change(e)}
+							onRequestSearch={(e) => onSubmit(e)}
+							style={{
+								margin: '0 auto',
+								maxWidth: 300,
+							}}
+						/>
+					</div>
 				</form>
-				<TutorList />
+				{/* <TutorList /> */}
 			</div>
-		</div>
+		</div>:	<TutorList />
 	);
 };
 
@@ -107,6 +124,7 @@ TutorSearch.propTypes = {
 const mapStatetoProps = (state) => ({
 	profiles: state.tutorList.profiles,
 	searched: state.search.searched,
+	isAuthenticated: state.auth.isAuthenticated
 });
 export default connect(mapStatetoProps, { getTutors, getQuestionSearch })(
 	TutorSearch

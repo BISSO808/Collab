@@ -8,8 +8,8 @@ import Grid from '@material-ui/core/Grid';
 import { setUpvote } from '../../actions/upvote';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { CircularProgress } from '@material-ui/core';
 import Tutor from '../tutor/TutorCard';
 const Comment = (props) => {
@@ -35,19 +35,21 @@ const Comment = (props) => {
 							<Grid item xs={1}>
 								<div>
 									<IconButton className={classes.grid1}>
-										<ArrowDropUpIcon
+										<ArrowUpwardIcon
 											fontSize="large"
 											onClick={() => vote(comm._id)}
 										/>
 									</IconButton>
 									<div className={classes.grid1}>{comm.value}</div>
 									<IconButton className={classes.grid1}>
-										<ArrowDropDownIcon fontSize="large" />
+										<ArrowDownwardIcon fontSize="large" />
 									</IconButton>
 								</div>
 							</Grid>
 							<Grid className={classes.grid} xs={11}>
-								<Paper className={classes.paper2}>{comm.content}</Paper>
+								<Paper className={classes.paper2} square={false}>
+									{comm.content}
+								</Paper>
 							</Grid>
 							<Grid className={classes.grid} xs={11}>
 								<Tutor user={comm.name} id={comm._id} />
@@ -79,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2),
 		textAlign: 'left',
 		background: '#ebeded',
+		borderRadius: 20,
 	},
 	grid: {
 		display: 'flex',

@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Tutor from './Tutor';
+import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { IconButton, Grid, Typography } from '@material-ui/core';
 import { getTutors } from '../../actions/tutor';
 import { connect } from 'react-redux';
+import SearchBar from 'material-ui-search-bar';
+import { getQuestionSearch } from '../../actions/search';
 import { CircularProgress } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
 	root: {},
@@ -16,44 +19,28 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const TutorsList = ({ getTutors, profiles, loading }) => {
+const TutorsList = ({history, getTutors, profiles, loading }) => {
 	useEffect(() => {
 		getTutors();
 	}, []);
+	const [data, setData] = useState({
+		searchValue: '',
+	});
+	const { searchValue } = data;
+	const change = (e) => {
+		setData({ ...data, searchValue: e });
+	};
+	const onSubmit = (e) => {
+		getQuestionSearch({ searchValue });
+		history.push('/questions')
+	};
 	const classes = useStyles();
-	// const products = [
-	// 	{
-	// 		title: 'Bishwa Bista',
-	// 		description:
-	// 			'computer Science major senior , I can help you with data structure.',
-	// 		totalDownloads: 'her',
-	// 	},
-	// 	{ title: 'apple', description: 'I am happy', totalDownloads: 'her' },
-	// 	{ title: 'apple', description: 'I am happy', totalDownloads: 'her' },
-	// 	{ title: 'apple', description: 'I am happy', totalDownloads: 'her' },
-	// 	{
-	// 		title: 'Bishwa Bista',
-	// 		description:
-	// 			'computer Science major senior , I can help you with data structure.',
-	// 		totalDownloads: 'her',
-	// 	},
-	// 	{ title: 'apple', description: 'I am happy', totalDownloads: 'her' },
-	// 	{ title: 'apple', description: 'I am happy', totalDownloads: 'her' },
-	// 	{ title: 'apple', description: 'I am happy', totalDownloads: 'her' },
-	// 	{
-	// 		title: 'Bishwa Bista',
-	// 		description:
-	// 			'computer Science major senior , I can help you with data structure.',
-	// 		totalDownloads: 'her',
-	// 	},
-	// 	{ title: 'apple', description: 'I am happy', totalDownloads: 'her' },
-	// 	{ title: 'apple', description: 'I am happy', totalDownloads: 'her' },
-	// 	{ title: 'apple', description: 'I am happy', totalDownloads: 'her' },
-	// ];
 	if (loading) {
 		return <CircularProgress disableShrink />;
 	} else {
 		return (
+			<div>
+		
 			<div className={classes.content}>
 				<Grid container spacing={3}>
 					{profiles.map((profile) => (
@@ -63,6 +50,7 @@ const TutorsList = ({ getTutors, profiles, loading }) => {
 					))}
 				</Grid>
 			</div>
+			</div>
 		);
 	}
 };
@@ -71,4 +59,4 @@ const mapStateToProps = (state) => ({
 	profiles: state.tutorList.profiles,
 	loading: state.tutorList.loading,
 });
-export default connect(mapStateToProps, { getTutors })(TutorsList);
+export default connect(mapStateToProps, { getTutors, getQuestionSearch })(TutorsList);

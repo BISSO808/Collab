@@ -1,0 +1,8 @@
+.flex-item-left {
+	display: flex;
+}
+
+.flex-item-right {
+	display: flex;
+	float: right;
+}

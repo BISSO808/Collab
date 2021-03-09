@@ -14,21 +14,20 @@ import AddQuestion from './components/question/AddQuestion';
 import Questioninfo from './components/question/Questioninfo';
 // import Tutors from './components/tutor/TutorsList';
 import Tutors from './components/tutor/TutorSearch';
-import openSocket from 'socket.io-client';
-import Fuse from 'fuse.js';
 //Redux
 import { loadUser } from './actions/user';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
 import Dashboard from './components/layout/Dashboard';
 import Image from './img/book-2943383_1280.png';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import AddProject from './components/project/addProject';
 import { red } from '@material-ui/core/colors';
+import Footer from './components/layout/Footer';
 if (localStorage.token) {
 	setAuthToken(localStorage.token);
 }
+
 const theme = createMuiTheme({
 	palette: {
 		primary: {
@@ -38,6 +37,10 @@ const theme = createMuiTheme({
 		secondary: {
 			light: '#ffffff',
 			main: '#ffffff',
+		},
+		btn: {
+			light: '#ff0000',
+			main: '#ff0000',
 		},
 	},
 });
@@ -67,8 +70,8 @@ const App = () => {
 						</Grid>
 					</Fragment>
 					<Grid item container>
-						<Grid item sm={2} xs={0} />
-						<Grid item sm={8} xs={12} paddingTop="100px">
+						{/* <Grid item sm={2} xs={0} ></Grid> */}
+						<Grid item sm={12} xs={12} paddingTop="100px">
 							<Fragment>
 								<Route exact path="/" component={Tutors} />
 
@@ -85,6 +88,11 @@ const App = () => {
 										path="/create-question"
 										component={AddQuestion}
 									/>
+									<PrivateRoute
+										exact
+										path="/create-question"
+										component={AddQuestion}
+									/>
 									<Route
 										exact
 										path="/question-info"
@@ -94,7 +102,7 @@ const App = () => {
 								{/* </section> */}
 							</Fragment>
 						</Grid>
-						<Grid item sm={2} xs={0} />
+						{/* <Grid item sm={2} xs={0} /> */}
 					</Grid>
 				</Grid>
 			</Router>

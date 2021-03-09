@@ -60,7 +60,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 		e.preventDefault();
 		if (password !== confirmPassword) {
 			setAlert(
-				'password does	return <Redirect to="/questions"></Redirect>;ot match',
+				'password doesnot match',
 				'error'
 			);
 		} else {

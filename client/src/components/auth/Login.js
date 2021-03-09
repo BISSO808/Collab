@@ -26,10 +26,13 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.primary,
 	},
 	paper: {
-		marginTop: theme.spacing(8),
+		marginTop: theme.spacing(1),
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
+		backgroundColor: 'white',
+		padding:20,
+		borderRadius: 25
 	},
 	form: {
 		width: '100%',
